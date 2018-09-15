@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import './views/home.dart';
+import './views/login.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final routes = <String, WidgetBuilder>{
+    LoginPage.tag: (context) => LoginPage(),
+    HomePage.tag: (context) => HomePage(title: 'MauriGap'),
+  };
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'MauriGap Demo',
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.lightGreen,
+        fontFamily: 'Nunito'
       ),
-      home: new MyHomePage(title: 'MauriGap'),
+      home: LoginPage(),
+//      initialRoute: LoginPage.tag,
+      routes: routes,
     );
   }
 }
