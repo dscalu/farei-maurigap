@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 import 'package:mauri_gap/views/harvest_records.dart';
+import './stock_tracking.dart';
+import './planting_record.dart';
 import 'package:mauri_gap/views/nutrient_application.dart';
 import 'package:mauri_gap/views/farmer_registration.dart';
 
@@ -24,8 +26,8 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             tile('Farmer Registration',FarmerRegistration.tag),
             tile('Field Registration',FieldRegistration.tag),
-            tile('Stock Tracking','stockTracking'),
-            tile('Planting Records','plantingRecords'),
+            tile('Stock Tracking', StockTracking.tag),
+            tile('Planting Records', PlantingRecords.tag),
             tile('Nutrient Application',NutrientApplication.tag),
             tile('Harvest Records',HarvestRecords.tag),
             tile('FAQ/Help','help'),

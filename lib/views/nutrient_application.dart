@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-
-//TODO Angela's
+import './components/components.dart';
 
 class NutrientApplication extends StatefulWidget {
   static String tag = 'nutrientApplication';
-  String title;
+  final String title;
 
   NutrientApplication({Key key,this.title}) : super(key: key);
   @override
@@ -20,7 +17,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold (
-      appBar: App_Bar('MauriGap'),
+      appBar: appBar(),
       body: new Column(
         children: <Widget>[
           new Expanded(
