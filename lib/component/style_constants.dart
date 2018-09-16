@@ -6,6 +6,10 @@ num NORMAL_FONT_SIZE = 20.0;
 //Methods
 textStyle() => new TextStyle(fontSize: 20.0, color: Colors.white);
 
+buttonFontStyle() => new TextStyle(fontSize: 20.0);
+
+padding() => const EdgeInsets.symmetric(vertical: 8.0,horizontal: 25.0);
+
 headingTextStyle(String name) =>
     new Container(
         color: Colors.grey.withOpacity(0.2),
