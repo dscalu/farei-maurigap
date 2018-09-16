@@ -51,7 +51,12 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
-        borderRadius: BorderRadius.circular(30.0),
+        shape: StadiumBorder(
+          side: BorderSide(width: 3.0, color: Colors.lightGreen)
+        ),
+//        borderRadius: BorderRadius.all(
+//          Radius.circular(30.0)
+//        ),
         child: MaterialButton(
           child: Text(
             'Log In',

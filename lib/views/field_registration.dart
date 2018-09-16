@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-import 'package:mauri_gap/models/field_entry.dart';
+import './components/components.dart';
+import 'package:mauri_gap/models/field.dart';
 
 class FieldRegistration extends StatefulWidget {
   static String tag = 'fieldRegistration';
-  String title;
+  final String title;
 
   FieldRegistration({Key key,this.title}) : super(key: key);
 
@@ -19,7 +18,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(widget.title),
+        appBar: appBar(),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -60,7 +59,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
 
   //Returns the form Widget
   form() {
-    FieldEntry fieldEntry;
+    Field fieldEntry;
     return new Form(
       autovalidate: true,
       key: _formKey,
@@ -69,29 +68,29 @@ class _FieldRegistrationState extends State<FieldRegistration> {
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Field No:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_number = value,
+            onSaved: (value) => fieldEntry.fieldNumber = value,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Total Area (Ha):'),
               validator: (value) =>
                   value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-                  fieldEntry.field_total_area //Todo parse to number,
+                  fieldEntry.fieldTotalArea //Todo parse to number,
               ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Irrigation Source'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_irrigation_source = value,
+            onSaved: (value) => fieldEntry.fieldIrrigationSource = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Physical Barrier'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_physical_barrier = value,
+            onSaved: (value) => fieldEntry.fieldPhysicalBarrier = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Field Address'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_address = value,
+            onSaved: (value) => fieldEntry.fieldAddress = value,
           ),
           new Center(
             child: new ButtonBar(
@@ -123,7 +122,10 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                         ),
                         new Text(
                           'Save',
-                          style: textStyle(),
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              color: Colors.white
+                          ),
                         )
                       ],
                     ))
