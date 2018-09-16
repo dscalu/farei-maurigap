@@ -3,14 +3,14 @@ class Farmer {
   String surName;
   String nidNo;
   String sfwfRegNo;
-  String farmName;
+  String farmUnit;
 
   Farmer(
-      this.firstName, this.surName, this.nidNo, this.sfwfRegNo, this.farmName);
+      this.firstName, this.surName, this.nidNo, this.sfwfRegNo, this.farmUnit);
 
   @override
   String toString() {
     return 'Farmer{firstName: $firstName, surName: $surName, nidNo: $nidNo, '
-        'sfwfRegNo: $sfwfRegNo, farmName: $farmName}';
+        'sfwfRegNo: $sfwfRegNo, farmName: $farmUnit}';
   }
 }
