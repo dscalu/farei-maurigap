@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget App_Bar(){
+Widget App_Bar(String title){
   return new AppBar(
-    title: new Text("Logo and Header", textAlign: TextAlign.center),
+    title: new Text(title, textAlign: TextAlign.center),
   );
 }

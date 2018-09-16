@@ -4,18 +4,22 @@ import 'package:mauri_gap/component/style_constants.dart';
 import 'package:mauri_gap/models/field_entry.dart';
 
 class FieldRegistration extends StatefulWidget {
+  static String tag = 'fieldRegistration';
+  String title;
+
+  FieldRegistration({Key key,this.title}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => new _FieldRegistrationState();
 }
 
 class _FieldRegistrationState extends State<FieldRegistration> {
-  static String tag = 'Field Registration';
   final _formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(),
+        appBar: App_Bar(widget.title),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
