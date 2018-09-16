@@ -3,17 +3,17 @@ import 'package:mauri_gap/component/App_Bar.dart';
 import 'package:mauri_gap/component/style_constants.dart';
 import 'package:mauri_gap/models/harvest_record_entries.dart';
 
-class PlantingRecords extends StatefulWidget {
-  static String tag = 'plantingRecords';
+class HarvestRecords extends StatefulWidget {
+  static String tag = 'harvestRecords';
   final String title;
 
-  PlantingRecords({Key key, this.title}) : super(key: key);
+  HarvestRecords({Key key, this.title}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => new _PlantingRecordsState();
+  State<StatefulWidget> createState() => new _HarvestRecordsState();
 }
 
-class _PlantingRecordsState extends State<PlantingRecords> {
+class _HarvestRecordsState extends State<HarvestRecords> {
   final _formKey = new GlobalKey<FormState>();
 
   @override
@@ -24,28 +24,28 @@ class _PlantingRecordsState extends State<PlantingRecords> {
           new Expanded(
             child: new Container(
                 child: new ListView(
-                  children: <Widget>[
-                    headingTextStyle('Planting Records'),
-                    new Container(
-                      padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-                      child: form(),
-                    ),
-                    headingTextStyle('Planting Records'),
-                    new Row(children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Icon(Icons.insert_drive_file,
-                            color: Colors.black45),
-                      ),
-                      new FlatButton(
-                          onPressed: _listEntries(),
-                          child: new Text(
-                            "View saved planting entries",
-                            style: new TextStyle(fontSize: 20.0),
-                          ))
-                    ]),
-                  ],
-                )),
+              children: <Widget>[
+                headingTextStyle('Harvest Records'),
+                new Container(
+                  padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+                  child: form(),
+                ),
+                headingTextStyle('Harvest Records'),
+                new Row(children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Icon(Icons.insert_drive_file,
+                        color: Colors.black45),
+                  ),
+                  new FlatButton(
+                      onPressed: _listEntries(),
+                      child: new Text(
+                        "View Saved Harvest History",
+                        style: new TextStyle(fontSize: 20.0),
+                      ))
+                ]),
+              ],
+            )),
           )
         ]));
   }
@@ -93,49 +93,40 @@ class _PlantingRecordsState extends State<PlantingRecords> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: new DropdownButton(
-                    items: list,
-                    value: selected,
-                    hint: new Text("Production System: "),
-                    onChanged: (value) {
-                      selected = value;
-                      setState(() {});
-                    }),
+          new TextFormField(
+            decoration: new InputDecoration(labelText: 'Produce Harvested:'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => harvestRecord.harvest_produce = value,
+          ),
+          new TextFormField(
+              decoration: new InputDecoration(labelText: 'Date Harvested'),
+              validator: (value) =>
+                  value.isEmpty ? "Please enter a value" : null,
+              onSaved: (value) =>
+                  harvestRecord.harvest_date //Todo parse the value,
               ),
-            ],
-          ),
-          new TextFormField(
-              decoration: new InputDecoration(labelText: 'Date Planted'),
-              validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              harvestRecord.harvest_date //Todo parse the value,
-          ),
-          new TextFormField(
-              decoration: new InputDecoration(labelText: 'Crop:'),
-              validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
-          ),
-          new TextFormField(
-              decoration: new InputDecoration(labelText: 'Variety:'),
-              validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
-          ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Area(m sq.):'),
               validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
+                  value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_area //Todo parse the value,
-          ),
+                  harvestRecord.harvest_area //Todo parse the value,
+              ),
+          new TextFormField(
+              decoration: new InputDecoration(labelText: 'Qty/Units:'),
+              validator: (value) =>
+                  value.isEmpty ? "Please enter a value" : null,
+              onSaved: (value) =>
+                  harvestRecord.harvest_quantity //Todo parse the value,
+              ),
+          new TextFormField(
+              decoration:
+                  new InputDecoration(labelText: 'Name of person harvesting'),
+              validator: (value) =>
+                  value.isEmpty ? "Please enter a value" : null,
+              onSaved: (value) =>
+                  harvestRecord.harvest_person //Todo parse the value,
+              ),
           new Center(
             child: new ButtonBar(
               alignment: MainAxisAlignment.spaceBetween,
