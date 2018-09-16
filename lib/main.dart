@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 import 'package:mauri_gap/views/harvest_records.dart';
+import 'package:mauri_gap/views/nutrient_application.dart';
 import 'package:mauri_gap/views/planting_record.dart';
+import 'package:mauri_gap/views/farmer_registration.dart';
 import './views/home.dart';
 import './views/login.dart';
 
@@ -14,7 +16,10 @@ class MyApp extends StatelessWidget {
     HarvestRecords.tag: (context) => HarvestRecords(title: 'Harvest Records'),
     FieldRegistration.tag: (context) => FieldRegistration(title: 'Field Registration'),
     PlantingRecords.tag: (context) => PlantingRecords(title: 'Planting Records'),
+    NutrientApplication.tag: (context) => NutrientApplication(title: 'Nutrient Application'),
+    FarmerRegistration.tag: (context) => FarmerRegistration(title: 'Farmer Registration'),
   };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
