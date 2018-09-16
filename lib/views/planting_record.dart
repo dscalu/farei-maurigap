@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-import 'package:mauri_gap/models/harvest_record_entries.dart';
+import './components/components.dart';
+import '../models/harvest.dart';
 
 class PlantingRecords extends StatefulWidget {
   static String tag = 'plantingRecords';
@@ -19,7 +18,7 @@ class _PlantingRecordsState extends State<PlantingRecords> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(widget.title),
+        appBar: appBar(),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -66,7 +65,7 @@ class _PlantingRecordsState extends State<PlantingRecords> {
   form() {
     String selected;
 
-    HarvestRecord harvestRecord;
+    Harvest harvestRecord;
     List<DropdownMenuItem<String>> list = [];
     list.add(new DropdownMenuItem(
         child: new Text("Field from database"), value: "data"));
@@ -113,28 +112,28 @@ class _PlantingRecordsState extends State<PlantingRecords> {
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_date //Todo parse the value,
+              harvestRecord.harvestDate = value as DateTime  //Todo parse the value,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Crop:'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
+              harvestRecord.produce //Todo parse the value,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Variety:'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
+              harvestRecord.units = value as num //Todo parse the value,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Area(m sq.):'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_area //Todo parse the value,
+              harvestRecord.area = value as num //Todo parse the value,
           ),
           new Center(
             child: new ButtonBar(
@@ -165,7 +164,10 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                         ),
                         new Text(
                           'Save',
-                          style: textStyle(),
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.white
+                          ),
                         )
                       ],
                     ))

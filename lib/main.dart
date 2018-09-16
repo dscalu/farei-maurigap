@@ -6,6 +6,7 @@ import 'package:mauri_gap/views/planting_record.dart';
 import 'package:mauri_gap/views/farmer_registration.dart';
 import './views/home.dart';
 import './views/login.dart';
+import './views/stock_tracking.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     HarvestRecords.tag: (context) => HarvestRecords(title: 'Harvest Records'),
     FieldRegistration.tag: (context) => FieldRegistration(title: 'Field Registration'),
     PlantingRecords.tag: (context) => PlantingRecords(title: 'Planting Records'),
+    StockTracking.tag: (context) => StockTracking(),
     NutrientApplication.tag: (context) => NutrientApplication(title: 'Nutrient Application'),
     FarmerRegistration.tag: (context) => FarmerRegistration(title: 'Farmer Registration'),
   };
@@ -24,10 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MauriGap Demo',
-      debugShowCheckedModeBanner: false,
+//      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.lightGreen,
-        fontFamily: 'Nunito'
+        fontFamily: 'Nunito',
+        /*textTheme: TextTheme(
+        )*/
       ),
       home: LoginPage(),
 //      initialRoute: LoginPage.tag,

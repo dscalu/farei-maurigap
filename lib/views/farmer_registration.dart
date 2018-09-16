@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
+import './components/components.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 
 class FarmerRegistration extends StatefulWidget {
@@ -20,7 +19,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return  Scaffold (
-     appBar: App_Bar('MauriGap'),
+     appBar: appBar(),
       body:  Column(
         children: <Widget>[
            Expanded(
@@ -54,7 +53,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                            FlatButton(
                               onPressed: null,
                               child:  Text(
-                                  "View registered fields",style:  buttonFontStyle(),
+                                  "View registered fields",style: buttonFontStyle(),
                               )),
                         ],
                       ),

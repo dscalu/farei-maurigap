@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/models/field_entry.dart';
+import 'package:mauri_gap/models/field.dart';
 
 class ListFieldEntries extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new fieldEntriesState();
+    return new FieldEntriesState();
   }
 }
 
-class fieldEntriesState extends State<ListFieldEntries> {
-  final List<FieldEntry> _entries = <FieldEntry>[];
+class FieldEntriesState extends State<ListFieldEntries> {
+  final List<Field> _entries = <Field>[];
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget _buildEntries() {
@@ -27,10 +27,10 @@ class fieldEntriesState extends State<ListFieldEntries> {
         });
   }
 
-  Widget _buildRow(FieldEntry entry) {
+  Widget _buildRow(Field entry) {
     return new ListTile(
       title: new Text(
-        entry.field_number,
+        entry.fieldNumber,
         style: _biggerFont,
       ),
     );
