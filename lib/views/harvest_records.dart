@@ -4,29 +4,33 @@ import 'package:mauri_gap/component/style_constants.dart';
 import 'package:mauri_gap/models/harvest_record_entries.dart';
 
 class HarvestRecords extends StatefulWidget {
+  static String tag = 'harvestRecords';
+  final String title;
+
+  HarvestRecords({Key key, this.title}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => new _HarvestRecordsState();
 }
 
 class _HarvestRecordsState extends State<HarvestRecords> {
-  static String tag = 'Harvest Records';
   final _formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(),
+        appBar: App_Bar(widget.title),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
                 child: new ListView(
               children: <Widget>[
-                headingTextStyle(tag),
+                headingTextStyle('Harvest Records'),
                 new Container(
                   padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
                   child: form(),
                 ),
-                headingTextStyle(tag),
+                headingTextStyle('Harvest Records'),
                 new Row(children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
