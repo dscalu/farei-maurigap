@@ -5,8 +5,12 @@ class Field {
   String fieldPhysicalBarrier;
   String fieldAddress;
 
-  Field(this.fieldNumber, this.fieldTotalArea, this.fieldIrrigationSource,
-      this.fieldPhysicalBarrier, this.fieldAddress);
+  Field(
+      {this.fieldNumber,
+      this.fieldTotalArea,
+      this.fieldIrrigationSource,
+      this.fieldPhysicalBarrier,
+      this.fieldAddress});
 
   @override
   String toString() {

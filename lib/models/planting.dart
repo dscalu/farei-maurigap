@@ -10,8 +10,13 @@ class PlantingRecord {
   num variety;
   num area;
 
-  PlantingRecord(this.field, this.system, this.datePlanted, this.crop,
-      this.variety, this.area);
+  PlantingRecord(
+      {this.field,
+      this.system,
+      this.datePlanted,
+      this.crop,
+      this.variety,
+      this.area});
 
   @override
   String toString() {

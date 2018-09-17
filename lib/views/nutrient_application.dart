@@ -1,52 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:mauri_gap/models/nutrient.dart';
 import './components/components.dart';
 
 class NutrientApplication extends StatefulWidget {
   static String tag = 'nutrientApplication';
   final String title;
 
-  NutrientApplication({Key key,this.title}) : super(key: key);
+  NutrientApplication({Key key, this.title}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => new _NutrientApplicationState();
 }
 
-class _NutrientApplicationState extends State<NutrientApplication>{
-  final _formKey = GlobalKey<FormState>();
+class _NutrientApplicationState extends State<NutrientApplication> {
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  Nutrient nutrient = new Nutrient();
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return new Scaffold (
-      appBar: appBar(),
+    return new Scaffold(
+      key: _scaffoldKey,
+      appBar: appBar(context),
       body: new Column(
         children: <Widget>[
           new Expanded(
               child: new Container(
-                child: new ListView(
-                  children: <Widget>[
-                    headingTextStyle(widget.title),
-                    new Container(
-                      padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-                      child: form(),
-                    ),
-                    headingTextStyle('Nutrient Appl. History'),
-                    Padding(
-                      padding: padding(),
-                      child: new Row(
-                        children: <Widget>[
-                          new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
-                          new FlatButton(
-                              onPressed: null,
-                              child: new Text(
-                                  "View saved nutrient entries", style: buttonFontStyle(),
-                              ))
-                        ],
-                      ),
-                    )
-                  ],
+            child: new ListView(
+              children: <Widget>[
+                headingTextStyle(widget.title),
+                new Container(
+                  padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+                  child: form(),
                 ),
-              )
-          )
+                headingTextStyle('Nutrient Appl. History'),
+                Padding(
+                  padding: padding(),
+                  child: new Row(
+                    children: <Widget>[
+                      new Icon(
+                        Icons.assignment,
+                        color: Colors.black38,
+                        size: 35.0,
+                      ),
+                      new FlatButton(
+                          onPressed: null,
+                          child: new Text(
+                            "View saved nutrient entries",
+                            style: buttonFontStyle(),
+                          ))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ))
         ],
       ),
     );
@@ -54,12 +63,17 @@ class _NutrientApplicationState extends State<NutrientApplication>{
 
   void _save() {
     if (_formKey.currentState.validate()) {
+      showMessage("Processing ...", _scaffoldKey);
+      //showMessage("Debugging purposes $nutrient.toString()", _scaffoldKey);
+      //Todo: Store in database and firebase
       _formKey.currentState.save();
+      showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
 
   void _cancel() {
     _formKey.currentState.reset();
+    Navigator.pop(context);
   }
 
   //Returns the form Widget
@@ -105,47 +119,34 @@ class _NutrientApplicationState extends State<NutrientApplication>{
 
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Nutrient Type:'),
-            validator: (value) => value.isEmpty ? "Please enter your firstname" : null,
+            validator: (value) =>
+                value.isEmpty ? "Nutrient Type is required" : null,
+                onSaved: (value) => nutrient.nutrientType = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Date Applied:'),
             validator: (value) =>
-            value.isEmpty ? "Please enter your surname" : null,
+                value.isEmpty ? "Please enter your surname" : null,
           ),
-         
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Amount:'),
-                  validator: (value) => value.isEmpty ? "Please enter a value" : null,
-                ),
-              ),
-              Expanded(
-                child: new DropdownButton(
-                    items: units,
-                    value: selectedUnits,
-                    hint: new Text("Units: "),
-                    onChanged: (value) {
-                      selectedUnits = value;
-                      setState(() {});
-                    }),
-              ),
-            ],
+          new TextFormField(
+            decoration: new InputDecoration(labelText: 'Amount:'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
           ),
 
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Mode of Application:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => nutrient.applicationMode = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Crop:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => nutrient.crop = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Plot Area(m.sq):'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => nutrient.area = int.parse(value),
           ),
           new Center(
             child: new ButtonBar(
@@ -177,10 +178,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                         ),
                         new Text(
                           'Save',
-                          style: TextStyle(
-                              fontSize: 22.0,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Colors.white),
 //
                         )
                       ],
@@ -193,4 +191,3 @@ class _NutrientApplicationState extends State<NutrientApplication>{
     );
   }
 }
-

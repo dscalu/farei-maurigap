@@ -16,12 +16,16 @@ class MyApp extends StatelessWidget {
     LoginPage.tag: (context) => LoginPage(),
     HomePage.tag: (context) => HomePage(title: 'MauriGap'),
     HarvestRecords.tag: (context) => HarvestRecords(title: 'Harvest Records'),
-    FieldRegistration.tag: (context) => FieldRegistration(title: 'Field Registration'),
-    PlantingRecords.tag: (context) => PlantingRecords(title: 'Planting Records'),
+    FieldRegistration.tag: (context) =>
+        FieldRegistration(title: 'Field Registration'),
+    PlantingRecords.tag: (context) =>
+        PlantingRecords(title: 'Planting Records'),
     StockTracking.tag: (context) => StockTracking(),
-    NutrientApplication.tag: (context) => NutrientApplication(title: 'Nutrient Application'),
-    FarmerRegistration.tag: (context) => FarmerRegistration(title: 'Farmer Registration'),
-    Help.tag: (context) => Help(title: 'Help'),
+    NutrientApplication.tag: (context) =>
+        NutrientApplication(title: 'Nutrient Application'),
+    FarmerRegistration.tag: (context) =>
+        FarmerRegistration(title: 'Farmer Registration'),
+    Help.tag: (context) => Help(title: 'Help & FAQ'),
   };
 
   @override

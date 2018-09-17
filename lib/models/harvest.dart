@@ -8,8 +8,13 @@ class Harvest {
   num units;
   String harvester;
 
-  Harvest(this.field, this.produce, this.harvestDate, this.area, this.units,
-      this.harvester);
+  Harvest(
+      {this.field,
+      this.produce,
+      this.harvestDate,
+      this.area,
+      this.units,
+      this.harvester});
 
   @override
   String toString() {
