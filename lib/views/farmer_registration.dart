@@ -4,7 +4,7 @@ import 'package:mauri_gap/views/field_registration.dart';
 
 class FarmerRegistration extends StatefulWidget {
   static String tag = 'farmerRegistration';
-  String title;
+  final String title;
 
   FarmerRegistration({Key key,this.title}) : super(key: key);
 
