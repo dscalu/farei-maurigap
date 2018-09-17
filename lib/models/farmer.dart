@@ -6,7 +6,11 @@ class Farmer {
   String farmUnit;
 
   Farmer(
-      this.firstName, this.surName, this.nidNo, this.sfwfRegNo, this.farmUnit);
+      {this.firstName,
+      this.surName,
+      this.nidNo,
+      this.sfwfRegNo,
+      this.farmUnit});
 
   @override
   String toString() {

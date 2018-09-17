@@ -16,12 +16,16 @@ class HarvestRecords extends StatefulWidget {
 }
 
 class _HarvestRecordsState extends State<HarvestRecords> {
-  final _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  Harvest harvest = Harvest();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        key: _scaffoldKey,
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -36,16 +40,18 @@ class _HarvestRecordsState extends State<HarvestRecords> {
                 Padding(
                   padding: padding(),
                   child: new Row(children: <Widget>[
-                   new Icon(Icons.assignment,
-                        color: Colors.black45,size: 35.0,),
-
-                  new FlatButton(
-                      onPressed: _listEntries(),
-                      child: new Text(
-                        "View Saved Harvest History",
-                        style: buttonFontStyle(),
-                      ))
-                ]),
+                    new Icon(
+                      Icons.assignment,
+                      color: Colors.black45,
+                      size: 35.0,
+                    ),
+                    new FlatButton(
+                        onPressed: _listEntries(),
+                        child: new Text(
+                          "View Saved Harvest History",
+                          style: buttonFontStyle(),
+                        ))
+                  ]),
                 ),
               ],
             )),
@@ -57,12 +63,18 @@ class _HarvestRecordsState extends State<HarvestRecords> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
+
+      showMessage("Processing ...", _scaffoldKey);
+      //showMessage("Debugging purposes $harvest.toString()", _scaffoldKey);
+      //Todo: Store in database and firebase
       _formKey.currentState.save();
+      showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
 
   void _cancel() {
     _formKey.currentState.reset();
+    Navigator.pop(context);
   }
 
   //Returns the form Widget
@@ -96,36 +108,30 @@ class _HarvestRecordsState extends State<HarvestRecords> {
             ],
           ),
           new TextFormField(
-            decoration: new InputDecoration(labelText: 'Produce Harvested:'),
+              decoration: new InputDecoration(labelText: 'Produce Harvested:'),
+              validator: (value) =>
+                  value.isEmpty ? "Please enter a value" : null,
+              onSaved: (value) => harvest.produce = value),
+          date(hintText: "Date Harvested", labelText: "Date Harvested"),
+          new TextFormField(
+            decoration: new InputDecoration(labelText: 'Area(m sq.):'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => harvest.produce = value
-          ),
-          date(hintText: "Date Harvested",labelText: "Date Harvested" ),
-          new TextFormField(
-              decoration: new InputDecoration(labelText: 'Area(m sq.):'),
-              validator: (value) =>
-                  value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-                  harvest.area = int.parse(value),
+            onSaved: (value) => harvest.area = int.parse(value),
             keyboardType: TextInputType.number,
           ),
           new TextFormField(
-              decoration: new InputDecoration(labelText: 'Qty/Units:'),
-              validator: (value) =>
-                  value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-                  harvest.units  = int.parse(value),
+            decoration: new InputDecoration(labelText: 'Qty/Units:'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => harvest.units = int.parse(value),
             keyboardType: TextInputType.number,
-              ),
+          ),
           new TextFormField(
-              decoration:
-                  new InputDecoration(labelText: 'Name of person harvesting'),
-              validator: (value) =>
-                  value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-                  harvest.harvester = value,
+            decoration:
+                new InputDecoration(labelText: 'Name of person harvesting'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => harvest.harvester = value,
             keyboardType: TextInputType.text,
-              ),
+          ),
           new Center(
             child: new ButtonBar(
               alignment: MainAxisAlignment.spaceBetween,
@@ -151,14 +157,14 @@ class _HarvestRecordsState extends State<HarvestRecords> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: new Icon(Icons.check_circle_outline,color: Colors.white,),
+                          child: new Icon(
+                            Icons.check_circle_outline,
+                            color: Colors.white,
+                          ),
                         ),
                         new Text(
                           'Save',
-                          style: TextStyle(
-                              fontSize: 22.0,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Colors.white),
                         )
                       ],
                     ))
@@ -171,7 +177,7 @@ class _HarvestRecordsState extends State<HarvestRecords> {
   }
 
   //build date
-  date({String hintText, String labelText}){
+  date({String hintText, String labelText}) {
     final TextEditingController _controller = new TextEditingController();
 
     DateTime convertToDate(String input) {
@@ -205,15 +211,14 @@ class _HarvestRecordsState extends State<HarvestRecords> {
     return new Row(children: <Widget>[
       new Expanded(
           child: new TextFormField(
-            decoration: new InputDecoration(
-              icon: const Icon(Icons.calendar_today),
-              hintText: hintText,
-              labelText: labelText,
-            ),
-            controller: _controller,
-            keyboardType: TextInputType.datetime,
-          )
-      )
+        decoration: new InputDecoration(
+          icon: const Icon(Icons.calendar_today),
+          hintText: hintText,
+          labelText: labelText,
+        ),
+        controller: _controller,
+        keyboardType: TextInputType.datetime,
+      ))
     ]);
   }
 }

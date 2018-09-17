@@ -7,7 +7,9 @@ import 'dart:io' as io;
 
 class DBHelper {
   static final DBHelper _instance = DBHelper.internal();
+
   DBHelper.internal();
+
   factory DBHelper() => _instance;
 
   static Database _db;

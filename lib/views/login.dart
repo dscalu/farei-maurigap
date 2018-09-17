@@ -10,7 +10,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   Widget email() {
     return TextFormField(
       autofocus: false,
@@ -18,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
           hintText: 'Email',
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
       initialValue: 'test@gmail.com',
       keyboardType: TextInputType.emailAddress,
     );
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           hintText: 'Password',
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
       initialValue: 'some password',
       obscureText: true,
     );
@@ -51,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         child: MaterialButton(
           child: Text(
             'Log In',
-            style: TextStyle(color: Colors.white,fontSize: 22.0),
+            style: TextStyle(color: Colors.white, fontSize: 22.0),
           ),
           color: Colors.lightGreen,
           height: 42.0,

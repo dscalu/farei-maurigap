@@ -1,40 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:mauri_gap/utils/application_constants.dart';
 
-Widget fareiImage(){
+Widget fareiImage() {
   var assetsImage = new AssetImage('assets/farei-logo.png');
-  var image = new Image(image: assetsImage,width: 110.0,height: 110.0,);
+  var image = new Image(
+    image: assetsImage,
+    width: 110.0,
+    height: 110.0,
+  );
   return image;
 }
-  Widget appBar() => AppBar(
-    title: ListTile(
-      leading: Icon(Icons.ac_unit),
-      title: new Text('MauriGap', textAlign: TextAlign.start),
-      contentPadding: EdgeInsets.only(left: 42.0),
+
+Widget appBar(context) => PreferredSize(
+    preferredSize: Size.fromHeight(70.0),
+    child: AppBar(
+        leading: FlatButton(
+          padding: const EdgeInsets.fromLTRB(30.0, 17.0, 20.0, 20.0),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 35.0,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Padding(
+          padding: const EdgeInsets.only(top: 6.0),
+          child: ListTile(
+            leading: Image(
+              image: AssetImage('assets/farei-logo.png'),
+              width: 40.0,
+              height: 40.0,
+            ),
+            title: Row(children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: new Text(
+                  APPLICATION_NAME,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              IconButton(
+                padding: EdgeInsets.only(
+                  left: 30.0,
+                ),
+                icon: Icon(
+                  Icons.help_outline,
+                  size: 40.0,
+                  color: Colors.white,
+                ),
+              )
+            ]),
+            contentPadding: EdgeInsets.only(left: 20.0),
+          ),
+        )));
+
+Widget headingTextStyle(String name) => new Container(
+    color: Colors.grey.withOpacity(0.3),
+    width: 400.00,
+    padding: EdgeInsets.fromLTRB(30.00, 20.00, 20.00, 20.00),
+    child: new Text(name,
+        style: new TextStyle(
+          color: Colors.black54,
+          fontSize: 22.0,
+        )));
+
+Widget viewTile(String recordType) {
+  return ListTile(
+    leading: Icon(
+      Icons.assignment,
+      color: Colors.black45,
+      size: 36.0,
     ),
-    centerTitle: true,
+    title: Text(
+      recordType,
+      style: TextStyle(fontSize: 22.0, color: Colors.black54, height: 1.5),
+    ),
+    onTap: () {},
   );
+}
 
-  Widget headingTextStyle(String name) => new Container(
-      color: Colors.grey.withOpacity(0.2),
-      width: 400.00,
-      padding: EdgeInsets.all(20.00),
-      child: new Text(name,
-          style: new TextStyle(color: Colors.black54, fontSize: 22.0)));
+buttonFontStyle() => TextStyle(color: Colors.grey, fontSize: 20.0);
 
-  Widget viewTile(String recordType) {
-    return ListTile(
-      leading: Icon(
-        Icons.sd_card,
-        color: Colors.lightGreen,
-        size: 36.0,
-      ),
-      title: Text(
-        recordType,
-        style: TextStyle(fontSize: 22.0, color: Colors.black54, height: 1.5),
-      ),
-      onTap: () {},
-    );
-  }
+padding() => EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0);
 
-  buttonFontStyle() => TextStyle(color: Colors.grey, fontSize: 20.0);
-  padding() => EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0);
+void showMessage(String message, Key, {double duration}) {
+  Key.currentState.showSnackBar(new SnackBar(
+      backgroundColor: Colors.lightGreen,
+      //Todo: figure out the duration option and how it works
+      content: new Text(
+        message,
+        textAlign: TextAlign.center,
+      )));
+}
