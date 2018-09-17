@@ -67,14 +67,45 @@ class _NutrientApplicationState extends State<NutrientApplication>{
 
   //Returns the form Widget
   form() {
+
+    List<DropdownMenuItem<String>> units = [];
+    units.add(DropdownMenuItem(
+        child: new Text('kg'), value: 'Value 1'));
+    units.add(DropdownMenuItem(
+        child: new Text('ml'), value: 'Value 2'));
+
+    List<DropdownMenuItem<String>> list = [];
+    list.add(DropdownMenuItem(
+      child: new Text('Option 1'), value: 'Value 1'));
+    list.add(DropdownMenuItem(
+        child: new Text('Option 2'), value: 'Value 2'));
+    list.add(DropdownMenuItem(
+        child: new Text('Option 3'), value: 'Value 3'));
+
+    String selectedUnits;
+    String selectedOption;
+
+
     return new Form(
       key: _formKey,
       child: new Column(
         children: <Widget>[
-          new TextFormField(
-            decoration: new InputDecoration(labelText: 'Select Field:'),
-            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: new DropdownButton(
+                    items: list,
+                    value: selectedOption,
+                    hint: new Text("Select Field: "),
+                    onChanged: (value) {
+                      selectedOption = value;
+                      setState(() {});
+                    }),
+              ),
+            ],
           ),
+
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Nutrient Type:'),
             validator: (value) => value.isEmpty ? "Please enter your firstname" : null,
@@ -84,10 +115,29 @@ class _NutrientApplicationState extends State<NutrientApplication>{
             validator: (value) =>
             value.isEmpty ? "Please enter your surname" : null,
           ),
-          new TextFormField(
-            decoration: new InputDecoration(labelText: 'Amount:'),
-            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+         
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: new TextFormField(
+                  decoration: new InputDecoration(labelText: 'Amount:'),
+                  validator: (value) => value.isEmpty ? "Please enter a value" : null,
+                ),
+              ),
+              Expanded(
+                child: new DropdownButton(
+                    items: units,
+                    value: selectedUnits,
+                    hint: new Text("Units: "),
+                    onChanged: (value) {
+                      selectedUnits = value;
+                      setState(() {});
+                    }),
+              ),
+            ],
           ),
+
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Mode of Application:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
