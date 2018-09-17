@@ -13,42 +13,48 @@ class PlantingRecords extends StatefulWidget {
 }
 
 class _PlantingRecordsState extends State<PlantingRecords> {
-  final _formKey = new GlobalKey<FormState>();
-  PlantingRecords plantingRecord;
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  PlantingRecord plantingRecord;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        key: _scaffoldKey,
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
                 child: new ListView(
-                  children: <Widget>[
-                    headingTextStyle('Planting Records'),
-                    new Container(
-                      padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-                      child: form(),
-                    ),
-                    headingTextStyle('Planting Records'),
+              children: <Widget>[
+                headingTextStyle('Planting Records'),
+                new Container(
+                  padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+                  child: form(),
+                ),
+                headingTextStyle('Planting Records'),
+                Padding(
+                  padding: padding(),
+                  child: new Row(children: <Widget>[
                     Padding(
-                      padding: padding(),
-                      child: new Row(children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: new Icon(Icons.assignment,
-                              color: Colors.black45,size: 35.0,),
-                        ),
-                        new FlatButton(
-                            onPressed: _listEntries(),
-                            child: new Text(
-                              "View saved planting entries",
-                              style: buttonFontStyle(),
-                            ))
-                      ]),
+                      padding: const EdgeInsets.all(8.0),
+                      child: new Icon(
+                        Icons.assignment,
+                        color: Colors.black45,
+                        size: 35.0,
+                      ),
                     ),
-                  ],
-                )),
+                    new FlatButton(
+                        onPressed: _listEntries(),
+                        child: new Text(
+                          "View saved planting entries",
+                          style: buttonFontStyle(),
+                        ))
+                  ]),
+                ),
+              ],
+            )),
           )
         ]));
   }
@@ -57,12 +63,17 @@ class _PlantingRecordsState extends State<PlantingRecords> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
+      showMessage("Processing ...", _scaffoldKey);
+      //showMessage("Debugging purposes $plantingRecord.toString()", _scaffoldKey);
+      //Todo: Store in database and firebase
       _formKey.currentState.save();
+      showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
 
   void _cancel() {
     _formKey.currentState.reset();
+    Navigator.pop(context);
   }
 
   //Returns the form Widget
@@ -89,7 +100,9 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                     hint: new Text("Select Field: "),
                     onChanged: (value) {
                       selected = value;
-                      setState(() {plantingRecord.field = value;});
+                      setState(() {
+                        plantingRecord.field = value;
+                      });
                     }),
               ),
             ],
@@ -105,7 +118,8 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                     onChanged: (value) {
                       selected = value;
                       setState(() {
-                        plantingRecord.system = value;});
+                        plantingRecord.system = value;
+                      });
                     }),
               ),
             ],
@@ -113,31 +127,25 @@ class _PlantingRecordsState extends State<PlantingRecords> {
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Date Planted'),
               validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
+                  value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              plantingRecord.datePlanted //Todo parse the value,
-          ),
+                  plantingRecord.datePlanted //Todo parse the value,
+              ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Crop:'),
               validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              plantingRecord.crop = value
-          ),
+                  value.isEmpty ? "Please enter a value" : null,
+              onSaved: (value) => plantingRecord.crop = value),
           new TextFormField(
-              decoration: new InputDecoration(labelText: 'Variety:'),
-              validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              plantingRecord.variety = int.parse(value),
+            decoration: new InputDecoration(labelText: 'Variety:'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => plantingRecord.variety = int.parse(value),
             keyboardType: TextInputType.number,
           ),
           new TextFormField(
-              decoration: new InputDecoration(labelText: 'Area(m sq.):'),
-              validator: (value) =>
-              value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-              plantingRecord.area  = int.parse(value),
+            decoration: new InputDecoration(labelText: 'Area(m sq.):'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => plantingRecord.area = int.parse(value),
             keyboardType: TextInputType.number,
           ),
           new Center(
@@ -165,14 +173,14 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: new Icon(Icons.check_circle_outline,color: Colors.white,),
+                          child: new Icon(
+                            Icons.check_circle_outline,
+                            color: Colors.white,
+                          ),
                         ),
                         new Text(
                           'Save',
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Colors.white),
                         )
                       ],
                     ))
