@@ -19,7 +19,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return  Scaffold (
-     appBar: appBar(),
+     appBar: appBar(context),
       body:  Column(
         children: <Widget>[
            Expanded(

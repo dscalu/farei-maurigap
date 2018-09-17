@@ -17,7 +17,7 @@ class _StockTracking extends State<StockTracking> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(

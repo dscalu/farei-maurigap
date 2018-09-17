@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   static final String tag = 'home';
   final String title;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,39 +20,57 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: Container(
         child: ListView(
+          padding: EdgeInsets.all(14.0),
           children: <Widget>[
-            tile('Farmer Registration',FarmerRegistration.tag),
+            tile('Farmer Registration', FarmerRegistration.tag),
             tile('Stock Tracking', StockTracking.tag),
             tile('Planting Records', PlantingRecords.tag),
-            tile('Nutrient Application',NutrientApplication.tag),
-            tile('Harvest Records',HarvestRecords.tag),
-            tile('FAQ/Help',Help.tag),
+            tile('Nutrient Application', NutrientApplication.tag),
+            tile('Harvest Records', HarvestRecords.tag),
+            tile('FAQ/Help', Help.tag),
           ],
         ),
       ),
     );
   }
 
-  Widget tile(String tileName,String nextView) {
+  Widget tile(String tileName, String nextView) {
     return ListTile(
-      contentPadding: EdgeInsets.only(left: 20.0, right: 20.0),
+      contentPadding: EdgeInsets.only(left: 16.0, right: 20.0),
       leading: CircleAvatar(
         backgroundColor: Colors.lightGreen,
-        child: FlutterLogo(size: 24.0),
-        radius: 24.0,
+        child: Icon(
+          Icons.beenhere,
+          color: Colors.white,
+          size: 30.0,
+        ),
+        radius: 32.0,
       ),
-      title: Text(
-        tileName,
-        style: TextStyle(color: Colors.black54, fontSize: 24.0, height: 2.2, ),
+      title: Padding(
+        padding: const EdgeInsets.only(left: 14.0),
+        child: Text(
+          tileName,
+          style: TextStyle(
+            color: Colors.black54,
+            fontSize: 22.0,
+            height: 2.4,
+          ),
+        ),
       ),
       enabled: true,
-      onTap: () { Navigator.of(context).pushNamed(nextView);},
+      onTap: () {
+        Navigator.of(context).pushNamed(nextView);
+      },
       subtitle: Text(
         '',
-        style: TextStyle(color: Colors.black54, fontSize: 22.0, height: 1.0, ),
+        style: TextStyle(
+          color: Colors.black54,
+          fontSize: 22.0,
+          height: 0.8,
+        ),
       ),
     );
   }

@@ -20,7 +20,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -32,15 +32,18 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                   child: form(),
                 ),
                 headingTextStyle('Field Entries'),
-                new Row(children: <Widget>[
-                  new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
-                  new FlatButton(
-                      onPressed: _listEntries(),
-                      child: new Text(
-                        "View Field Entries",
-                        style: new TextStyle(fontSize: 20.0),
-                      ))
-                ]),
+                Padding(
+                  padding: padding(),
+                  child: new Row(children: <Widget>[
+                    new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
+                    new FlatButton(
+                        onPressed: _listEntries(),
+                        child: new Text(
+                          "View Field Entries",
+                          style: buttonFontStyle(),
+                        ))
+                  ]),
+                ),
               ],
             )),
           )
@@ -117,9 +120,9 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                         )
                       ],
                     )),
-                RaisedButton(
+                FlatButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(

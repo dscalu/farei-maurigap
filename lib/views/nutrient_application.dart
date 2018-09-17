@@ -17,7 +17,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold (
-      appBar: appBar(),
+      appBar: appBar(context),
       body: new Column(
         children: <Widget>[
           new Expanded(
