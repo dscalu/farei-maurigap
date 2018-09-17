@@ -3,7 +3,7 @@ import './field.dart';
 enum Unit { kg, ml }
 
 class Nutrient {
-  Field field;
+  String field;
   String nutrientType;
   DateTime dateApplied;
   num amount;
@@ -17,8 +17,13 @@ class Nutrient {
 
   @override
   String toString() {
-    return 'Nutrient{field: $field, nutrientType: $nutrientType, dateApplied: '
-        '$dateApplied, amount: $amount, unit: $unit, applicationMode: '
-        '$applicationMode, crop: $crop, area: $area}';
+    return 'Nutrient{'
+        'field: $field, '
+        'nutrientType: $nutrientType, '
+        'dateApplied: $dateApplied, '
+        'amount: $amount, '
+        'unit: $unit, '
+        'applicationMode: $applicationMode, '
+        'crop: $crop, area: $area}';
   }
 }

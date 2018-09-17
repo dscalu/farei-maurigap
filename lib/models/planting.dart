@@ -3,7 +3,7 @@ import '../models/field.dart';
 enum ProductionSystem { OpenField, Protected, Hydroponics }
 
 class PlantingRecord {
-  Field field;
+  String field;
   ProductionSystem system;
   DateTime datePlanted;
   String crop;
@@ -15,7 +15,11 @@ class PlantingRecord {
 
   @override
   String toString() {
-    return 'PlantingRecord{field: $field, system: $system, datePlanted: '
-        '$datePlanted, crop: $crop, variety: $variety, area: $area}';
+    return 'PlantingRecord{'
+        'field: $field, '
+        'system: $system, '
+        'datePlanted: $datePlanted, '
+        'crop: $crop, '
+        'variety: $variety, area: $area}';
   }
 }

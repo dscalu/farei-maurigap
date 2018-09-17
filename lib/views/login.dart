@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mauri_gap/views/components/components.dart';
 import './home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,11 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget logo() {
     return Hero(
       tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.lightGreenAccent,
-        child: FlutterLogo(size: 60.0),
-        radius: 48.0,
-      ),
+      child: fareiImage(),
     );
   }
 
@@ -51,18 +48,12 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
-        shape: StadiumBorder(
-          side: BorderSide(width: 3.0, color: Colors.lightGreen)
-        ),
-//        borderRadius: BorderRadius.all(
-//          Radius.circular(30.0)
-//        ),
         child: MaterialButton(
           child: Text(
             'Log In',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white,fontSize: 22.0),
           ),
-          color: Colors.lightGreenAccent,
+          color: Colors.lightGreen,
           height: 42.0,
           onPressed: () {
             Navigator.of(context).pushNamed(HomePage.tag);

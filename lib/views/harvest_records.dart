@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import './components/components.dart';
 import '../models/harvest.dart';
+
+import 'dart:async';
+import 'package:intl/intl.dart';
+
 class HarvestRecords extends StatefulWidget {
-  static String tag = 'harvestRecords';
+  static final String tag = 'harvestRecords';
   final String title;
 
   HarvestRecords({Key key, this.title}) : super(key: key);
@@ -29,19 +33,20 @@ class _HarvestRecordsState extends State<HarvestRecords> {
                   child: form(),
                 ),
                 headingTextStyle('Harvest Records'),
-                new Row(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: new Icon(Icons.insert_drive_file,
-                        color: Colors.black45),
-                  ),
+                Padding(
+                  padding: padding(),
+                  child: new Row(children: <Widget>[
+                   new Icon(Icons.assignment,
+                        color: Colors.black45,size: 35.0,),
+
                   new FlatButton(
                       onPressed: _listEntries(),
                       child: new Text(
                         "View Saved Harvest History",
-                        style: new TextStyle(fontSize: 20.0),
+                        style: buttonFontStyle(),
                       ))
                 ]),
+                ),
               ],
             )),
           )
@@ -64,7 +69,7 @@ class _HarvestRecordsState extends State<HarvestRecords> {
   form() {
     String selected;
 
-    Harvest harvestRecord;
+    Harvest harvest;
     List<DropdownMenuItem<String>> list = [];
     list.add(new DropdownMenuItem(
         child: new Text("Field from database"), value: "data"));
@@ -72,7 +77,6 @@ class _HarvestRecordsState extends State<HarvestRecords> {
         child: new Text("Field from database"), value: "data"));
 
     return new Form(
-      autovalidate: true,
       key: _formKey,
       child: new Column(
         children: <Widget>[
@@ -94,28 +98,24 @@ class _HarvestRecordsState extends State<HarvestRecords> {
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Produce Harvested:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => harvestRecord.produce = value
+            onSaved: (value) => harvest.produce = value
           ),
-          new TextFormField(
-              decoration: new InputDecoration(labelText: 'Date Harvested'),
-              validator: (value) =>
-                  value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-                  harvestRecord.harvestDate = value as DateTime //Todo parse the value,
-              ),
+          date(hintText: "Date Harvested",labelText: "Date Harvested" ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Area(m sq.):'),
               validator: (value) =>
                   value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-                  harvestRecord.area = value as num //Todo parse the value,
-              ),
+                  harvest.area = int.parse(value),
+            keyboardType: TextInputType.number,
+          ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Qty/Units:'),
               validator: (value) =>
                   value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-                  harvestRecord.units = value as num //Todo parse the value,
+                  harvest.units  = int.parse(value),
+            keyboardType: TextInputType.number,
               ),
           new TextFormField(
               decoration:
@@ -123,7 +123,8 @@ class _HarvestRecordsState extends State<HarvestRecords> {
               validator: (value) =>
                   value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-                  harvestRecord.harvester = value //Todo parse the value,
+                  harvest.harvester = value,
+            keyboardType: TextInputType.text,
               ),
           new Center(
             child: new ButtonBar(
@@ -145,12 +146,12 @@ class _HarvestRecordsState extends State<HarvestRecords> {
                     )),
                 RaisedButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: new Icon(Icons.check_circle_outline),
+                          child: new Icon(Icons.check_circle_outline,color: Colors.white,),
                         ),
                         new Text(
                           'Save',
@@ -167,5 +168,52 @@ class _HarvestRecordsState extends State<HarvestRecords> {
         ],
       ),
     );
+  }
+
+  //build date
+  date({String hintText, String labelText}){
+    final TextEditingController _controller = new TextEditingController();
+
+    DateTime convertToDate(String input) {
+      try {
+        var d = new DateFormat.yMd().parseStrict(input);
+        return d;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    Future _chooseDate(BuildContext context, String initialDateString) async {
+      var now = new DateTime.now();
+      var initialDate = convertToDate(initialDateString) ?? now;
+      initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now)
+          ? initialDate
+          : now);
+
+      var result = await showDatePicker(
+          context: context,
+          initialDate: initialDate,
+          firstDate: new DateTime(1900),
+          lastDate: new DateTime.now());
+
+      if (result == null) return;
+      setState(() {
+        _controller.text = new DateFormat.yMd().format(result);
+      });
+    }
+
+    return new Row(children: <Widget>[
+      new Expanded(
+          child: new TextFormField(
+            decoration: new InputDecoration(
+              icon: const Icon(Icons.calendar_today),
+              hintText: hintText,
+              labelText: labelText,
+            ),
+            controller: _controller,
+            keyboardType: TextInputType.datetime,
+          )
+      )
+    ]);
   }
 }

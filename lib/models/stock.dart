@@ -20,8 +20,12 @@ class Stock {
 
   @override
   String toString() {
-    return 'Stock{input: $input, supplierName: $supplierName, supplierAddr: '
-        '$supplierAddr, qtyPurchased: $qtyPurchased, dateReceived: '
-        '$dateReceived, storageAddr: $storageAddr}';
+    return 'Stock{'
+        'input: $input, '
+        'supplierName: $supplierName, '
+        'supplierAddr: $supplierAddr, '
+        'qtyPurchased: $qtyPurchased, '
+        'dateReceived: $dateReceived, '
+        'storageAddr: $storageAddr}';
   }
 }

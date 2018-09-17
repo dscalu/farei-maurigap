@@ -49,7 +49,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                       padding: padding(),
                       child: Row(
                         children: <Widget>[
-                           Icon(Icons.insert_drive_file, color: Colors.black38,size: 40.0,),
+                           Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
                            FlatButton(
                               onPressed: null,
                               child:  Text(
@@ -122,9 +122,9 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                         )
                       ],
                     )),
-                RaisedButton(
+                FlatButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child:  Row(
                       children: <Widget>[
                         Padding(
@@ -134,7 +134,10 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                         ),
                          Text(
                           'Save',
-//
+                             style: TextStyle(
+                             fontSize: 22.0,
+                             color: Colors.white
+                         ),
                         )
                       ],
                     ))
