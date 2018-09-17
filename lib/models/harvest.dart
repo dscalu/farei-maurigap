@@ -13,7 +13,12 @@ class Harvest {
 
   @override
   String toString() {
-    return 'Harvest{field: $field, produce: $produce, harvestDate: '
-        '$harvestDate, area: $area, units: $units, harvester: $harvester}';
+    return 'Harvest{'
+        'field: $field, '
+        'produce: $produce, '
+        'harvestDate: $harvestDate, '
+        'area: $area, '
+        'units: $units, '
+        'harvester: $harvester}';
   }
 }

@@ -34,7 +34,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                       padding: padding(),
                       child: new Row(
                         children: <Widget>[
-                          new Icon(Icons.insert_drive_file, color: Colors.black38),
+                          new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
                           new FlatButton(
                               onPressed: null,
                               child: new Text(
@@ -117,7 +117,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                     )),
                 RaisedButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(
@@ -127,6 +127,10 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                         ),
                         new Text(
                           'Save',
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              color: Colors.white
+                          ),
 //
                         )
                       ],

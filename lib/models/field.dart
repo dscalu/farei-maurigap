@@ -10,9 +10,11 @@ class Field {
 
   @override
   String toString() {
-    return 'FieldEntry{fieldNumber: $fieldNumber, fieldTotalArea: '
-        '$fieldTotalArea, fieldIrrigationSource: $fieldIrrigationSource, '
-        'fieldPhysicalBarrier: $fieldPhysicalBarrier, fieldAddress: '
-        '$fieldAddress}';
+    return 'FieldEntry{'
+        'fieldNumber: $fieldNumber, '
+        'fieldTotalArea: $fieldTotalArea, '
+        'fieldIrrigationSource: $fieldIrrigationSource, '
+        'fieldPhysicalBarrier: $fieldPhysicalBarrier, '
+        'fieldAddress: $fieldAddress}';
   }
 }
