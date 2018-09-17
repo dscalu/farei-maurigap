@@ -15,6 +15,6 @@ class Farmer {
         'surName: $surName, '
         'nidNo: $nidNo, '
         'sfwfRegNo: $sfwfRegNo, '
-        'farmName: $farmName}';
+        'farmUnit: $farmUnit}';
   }
 }
