@@ -12,8 +12,15 @@ class Nutrient {
   String crop;
   num area;
 
-  Nutrient(this.field, this.nutrientType, this.dateApplied, this.amount,
-      this.unit, this.applicationMode, this.crop, this.area);
+  Nutrient(
+      {this.field,
+      this.nutrientType,
+      this.dateApplied,
+      this.amount,
+      this.unit,
+      this.applicationMode,
+      this.crop,
+      this.area});
 
   @override
   String toString() {

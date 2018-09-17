@@ -13,36 +13,41 @@ class _StockTracking extends State<StockTracking> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  Stock stock;
+  Stock stock = Stock();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        key: _scaffoldKey,
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
                 child: new ListView(
-                  children: <Widget>[
-                    headingTextStyle('Stock Tracking'),
-                    new Container(
-                      padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-                      child: form(),
+              children: <Widget>[
+                headingTextStyle('Stock Tracking'),
+                new Container(
+                  padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
+                  child: form(),
+                ),
+                headingTextStyle('Stock Entries'),
+                Padding(
+                  padding: padding(),
+                  child: new Row(children: <Widget>[
+                    new Icon(
+                      Icons.assignment,
+                      color: Colors.black38,
+                      size: 35.0,
                     ),
-                    headingTextStyle('Stock Entries'),
-                    Padding(
-                      padding: padding(),
-                      child: new Row(children: <Widget>[
-                        new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
-                        new FlatButton(
-                            onPressed: _listEntries(),
-                            child: new Text(
-                              "View Stock Entries",
-                              style: buttonFontStyle(),
-                            ))
-                      ]),
-                    ),
-                  ],
-                )),
+                    new FlatButton(
+                        onPressed: _listEntries(),
+                        child: new Text(
+                          "View Stock Entries",
+                          style: buttonFontStyle(),
+                        ))
+                  ]),
+                ),
+              ],
+            )),
           )
         ]));
   }
@@ -51,18 +56,17 @@ class _StockTracking extends State<StockTracking> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
+      showMessage("Processing ...", _scaffoldKey);
+      //showMessage("Debugging purposes $stock.toString()", _scaffoldKey);
+      //Todo: Store in database and firebase
       _formKey.currentState.save();
-      showMessage(stock.toString());
+      showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
 
   void _cancel() {
     _formKey.currentState.reset();
-  }
-
-  void showMessage(String message, [MaterialColor color = Colors.red]) {
-    _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(backgroundColor: color, content: new Text(message)));
+    Navigator.pop(context);
   }
 
   //Returns the form Widget
@@ -77,8 +81,8 @@ class _StockTracking extends State<StockTracking> {
               labelText: 'Supplier\'s Name',
             ),
             validator: (val) =>
-            val.isEmpty ? 'Supplier Name is required' : null,
-            onSaved: (val) => {},
+                val.isEmpty ? 'Supplier Name is required' : null,
+            onSaved: (val) => stock.supplierName = val,
           ),
           TextFormField(
             decoration: InputDecoration(
@@ -86,8 +90,8 @@ class _StockTracking extends State<StockTracking> {
               labelText: 'Supplier\'s Addr.',
             ),
             validator: (val) =>
-            val.isEmpty ? 'Supplier address is required' : null,
-            onSaved: (val) => {},
+                val.isEmpty ? 'Supplier address is required' : null,
+            onSaved: (val) => stock.supplierAddr = val,
           ),
           TextFormField(
             decoration: InputDecoration(
@@ -96,9 +100,9 @@ class _StockTracking extends State<StockTracking> {
             ),
             validator: (val) => val.isEmpty
                 ? 'Quantity purchased is '
-                'required'
+                    'required'
                 : null,
-            onSaved: (val) => {},
+            onSaved: (val) => stock.qtyPurchased = int.parse(val),
           ),
           TextFormField(
             decoration: InputDecoration(
@@ -107,8 +111,8 @@ class _StockTracking extends State<StockTracking> {
             ),
             keyboardType: TextInputType.datetime,
             validator: (val) =>
-            val.isEmpty ? 'Supplier Name is required' : null,
-            onSaved: (val) => {},
+                val.isEmpty ? 'Supplier Name is required' : null,
+            onSaved: (val) => stock.dateReceived ,
           ),
           TextFormField(
             decoration: InputDecoration(
@@ -117,8 +121,8 @@ class _StockTracking extends State<StockTracking> {
             ),
             keyboardType: TextInputType.datetime,
             validator: (val) =>
-            val.isEmpty ? 'Storage address is required' : null,
-            onSaved: (val) => {},
+                val.isEmpty ? 'Storage address is required' : null,
+            onSaved: (val) => stock.supplierAddr = val,
           ),
           new Center(
             child: new ButtonBar(
@@ -150,10 +154,7 @@ class _StockTracking extends State<StockTracking> {
                         ),
                         new Text(
                           'Save',
-                          style: TextStyle(
-                              fontSize: 22.0,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Colors.white),
                         )
                       ],
                     ))

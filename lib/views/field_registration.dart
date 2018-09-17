@@ -15,12 +15,13 @@ class FieldRegistration extends StatefulWidget {
 class _FieldRegistrationState extends State<FieldRegistration> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  Field field;
+  Field field = new Field();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: appBar(),
+        key: _scaffoldKey,
+        appBar: appBar(context),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -32,15 +33,22 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                   child: form(),
                 ),
                 headingTextStyle('Field Entries'),
-                new Row(children: <Widget>[
-                  new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
-                  new FlatButton(
-                      onPressed: _listEntries(),
-                      child: new Text(
-                        "View Field Entries",
-                        style: new TextStyle(fontSize: 20.0),
-                      ))
-                ]),
+                Padding(
+                  padding: padding(),
+                  child: new Row(children: <Widget>[
+                    new Icon(
+                      Icons.assignment,
+                      color: Colors.black38,
+                      size: 35.0,
+                    ),
+                    new FlatButton(
+                        onPressed: _listEntries(),
+                        child: new Text(
+                          "View Field Entries",
+                          style: buttonFontStyle(),
+                        ))
+                  ]),
+                ),
               ],
             )),
           )
@@ -51,23 +59,21 @@ class _FieldRegistrationState extends State<FieldRegistration> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
+      showMessage("Processing ...", _scaffoldKey);
+      //showMessage("Debugging purposes $field.toString()", _scaffoldKey);
+      //Todo: Store in database and firebase
       _formKey.currentState.save();
-      showMessage(field.toString());
+      showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
 
   void _cancel() {
     _formKey.currentState.reset();
-  }
-
-  void showMessage(String message, [MaterialColor color = Colors.red]) {
-    _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(backgroundColor: color, content: new Text(message)));
+    Navigator.pop(context);
   }
 
   //Returns the form Widget
   form() {
-    Field field;
     return new Form(
       key: _formKey,
       child: new Column(
@@ -117,9 +123,9 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                         )
                       ],
                     )),
-                RaisedButton(
+                FlatButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(
@@ -129,10 +135,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                         ),
                         new Text(
                           'Save',
-                          style: TextStyle(
-                              fontSize: 22.0,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 22.0, color: Colors.white),
                         )
                       ],
                     ))
