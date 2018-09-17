@@ -10,7 +10,11 @@ class Farmer {
 
   @override
   String toString() {
-    return 'Farmer{firstName: $firstName, surName: $surName, nidNo: $nidNo, '
-        'sfwfRegNo: $sfwfRegNo, farmName: $farmName}';
+    return 'Farmer{'
+        'firstName: $firstName, '
+        'surName: $surName, '
+        'nidNo: $nidNo, '
+        'sfwfRegNo: $sfwfRegNo, '
+        'farmName: $farmName}';
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 import 'package:mauri_gap/views/harvest_records.dart';
+import 'package:mauri_gap/views/help.dart';
 import 'package:mauri_gap/views/nutrient_application.dart';
 import 'package:mauri_gap/views/planting_record.dart';
 import 'package:mauri_gap/views/farmer_registration.dart';
@@ -20,11 +21,13 @@ class MyApp extends StatelessWidget {
     StockTracking.tag: (context) => StockTracking(),
     NutrientApplication.tag: (context) => NutrientApplication(title: 'Nutrient Application'),
     FarmerRegistration.tag: (context) => FarmerRegistration(title: 'Farmer Registration'),
+    Help.tag: (context) => Help(title: 'Help'),
   };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'MauriGap Demo',
 //      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
