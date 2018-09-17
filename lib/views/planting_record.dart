@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-import 'package:mauri_gap/models/harvest_record_entries.dart';
+import './components/components.dart';
+import '../models/planting.dart';
 
 class PlantingRecords extends StatefulWidget {
-  static String tag = 'plantingRecords';
+  static final String tag = 'plantingRecords';
   final String title;
 
   PlantingRecords({Key key, this.title}) : super(key: key);
@@ -15,11 +14,12 @@ class PlantingRecords extends StatefulWidget {
 
 class _PlantingRecordsState extends State<PlantingRecords> {
   final _formKey = new GlobalKey<FormState>();
+  PlantingRecords plantingRecord;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(widget.title),
+        appBar: appBar(),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -31,19 +31,22 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                       child: form(),
                     ),
                     headingTextStyle('Planting Records'),
-                    new Row(children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Icon(Icons.insert_drive_file,
-                            color: Colors.black45),
-                      ),
-                      new FlatButton(
-                          onPressed: _listEntries(),
-                          child: new Text(
-                            "View saved planting entries",
-                            style: new TextStyle(fontSize: 20.0),
-                          ))
-                    ]),
+                    Padding(
+                      padding: padding(),
+                      child: new Row(children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Icon(Icons.assignment,
+                              color: Colors.black45,size: 35.0,),
+                        ),
+                        new FlatButton(
+                            onPressed: _listEntries(),
+                            child: new Text(
+                              "View saved planting entries",
+                              style: buttonFontStyle(),
+                            ))
+                      ]),
+                    ),
                   ],
                 )),
           )
@@ -65,8 +68,7 @@ class _PlantingRecordsState extends State<PlantingRecords> {
   //Returns the form Widget
   form() {
     String selected;
-
-    HarvestRecord harvestRecord;
+    PlantingRecord plantingRecord;
     List<DropdownMenuItem<String>> list = [];
     list.add(new DropdownMenuItem(
         child: new Text("Field from database"), value: "data"));
@@ -74,7 +76,6 @@ class _PlantingRecordsState extends State<PlantingRecords> {
         child: new Text("Field from database"), value: "data"));
 
     return new Form(
-      autovalidate: true,
       key: _formKey,
       child: new Column(
         children: <Widget>[
@@ -88,7 +89,7 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                     hint: new Text("Select Field: "),
                     onChanged: (value) {
                       selected = value;
-                      setState(() {});
+                      setState(() {plantingRecord.field = value;});
                     }),
               ),
             ],
@@ -103,7 +104,8 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                     hint: new Text("Production System: "),
                     onChanged: (value) {
                       selected = value;
-                      setState(() {});
+                      setState(() {
+                        plantingRecord.system = value;});
                     }),
               ),
             ],
@@ -113,28 +115,30 @@ class _PlantingRecordsState extends State<PlantingRecords> {
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_date //Todo parse the value,
+              plantingRecord.datePlanted //Todo parse the value,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Crop:'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
+              plantingRecord.crop = value
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Variety:'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_quantity //Todo parse the value,
+              plantingRecord.variety = int.parse(value),
+            keyboardType: TextInputType.number,
           ),
           new TextFormField(
               decoration: new InputDecoration(labelText: 'Area(m sq.):'),
               validator: (value) =>
               value.isEmpty ? "Please enter a value" : null,
               onSaved: (value) =>
-              harvestRecord.harvest_area //Todo parse the value,
+              plantingRecord.area  = int.parse(value),
+            keyboardType: TextInputType.number,
           ),
           new Center(
             child: new ButtonBar(
@@ -154,18 +158,21 @@ class _PlantingRecordsState extends State<PlantingRecords> {
                         )
                       ],
                     )),
-                RaisedButton(
+                FlatButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: new Icon(Icons.check_circle_outline),
+                          child: new Icon(Icons.check_circle_outline,color: Colors.white,),
                         ),
                         new Text(
                           'Save',
-                          style: textStyle(),
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.white
+                          ),
                         )
                       ],
                     ))

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-
-//TODO Angela's
+import './components/components.dart';
 
 class NutrientApplication extends StatefulWidget {
   static String tag = 'nutrientApplication';
-  String title;
+  final String title;
 
   NutrientApplication({Key key,this.title}) : super(key: key);
   @override
@@ -20,7 +17,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold (
-      appBar: App_Bar('MauriGap'),
+      appBar: appBar(),
       body: new Column(
         children: <Widget>[
           new Expanded(
@@ -37,7 +34,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                       padding: padding(),
                       child: new Row(
                         children: <Widget>[
-                          new Icon(Icons.insert_drive_file, color: Colors.black38),
+                          new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
                           new FlatButton(
                               onPressed: null,
                               child: new Text(
@@ -170,7 +167,7 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                     )),
                 RaisedButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child: new Row(
                       children: <Widget>[
                         Padding(
@@ -180,6 +177,10 @@ class _NutrientApplicationState extends State<NutrientApplication>{
                         ),
                         new Text(
                           'Save',
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              color: Colors.white
+                          ),
 //
                         )
                       ],

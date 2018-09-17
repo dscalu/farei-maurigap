@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
+import './components/components.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 
 class FarmerRegistration extends StatefulWidget {
   static String tag = 'farmerRegistration';
-  String title;
+  final String title;
 
   FarmerRegistration({Key key,this.title}) : super(key: key);
 
@@ -20,7 +19,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return  Scaffold (
-     appBar: App_Bar('MauriGap'),
+     appBar: appBar(),
       body:  Column(
         children: <Widget>[
            Expanded(
@@ -50,11 +49,11 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                       padding: padding(),
                       child: Row(
                         children: <Widget>[
-                           Icon(Icons.insert_drive_file, color: Colors.black38,size: 40.0,),
+                           Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
                            FlatButton(
                               onPressed: null,
                               child:  Text(
-                                  "View registered fields",style:  buttonFontStyle(),
+                                  "View registered fields",style: buttonFontStyle(),
                               )),
                         ],
                       ),
@@ -123,9 +122,9 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                         )
                       ],
                     )),
-                RaisedButton(
+                FlatButton(
                     onPressed: _save,
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     child:  Row(
                       children: <Widget>[
                         Padding(
@@ -135,7 +134,10 @@ class _FarmerRegistrationState extends State<FarmerRegistration>{
                         ),
                          Text(
                           'Save',
-//
+                             style: TextStyle(
+                             fontSize: 22.0,
+                             color: Colors.white
+                         ),
                         )
                       ],
                     ))

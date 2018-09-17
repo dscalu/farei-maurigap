@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/component/App_Bar.dart';
-import 'package:mauri_gap/component/style_constants.dart';
-import 'package:mauri_gap/models/field_entry.dart';
+import './components/components.dart';
+import 'package:mauri_gap/models/field.dart';
 
 class FieldRegistration extends StatefulWidget {
-  static String tag = 'fieldRegistration';
-  String title;
+  static final String tag = 'fieldRegistration';
+  final String title;
 
-  FieldRegistration({Key key,this.title}) : super(key: key);
+  FieldRegistration({Key key, this.title}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => new _FieldRegistrationState();
 }
 
 class _FieldRegistrationState extends State<FieldRegistration> {
-  final _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  Field field;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: App_Bar(widget.title),
+        appBar: appBar(),
         body: new Column(children: <Widget>[
           new Expanded(
             child: new Container(
@@ -32,7 +33,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                 ),
                 headingTextStyle('Field Entries'),
                 new Row(children: <Widget>[
-                  new Icon(Icons.insert_drive_file, color: Colors.green),
+                  new Icon(Icons.assignment, color: Colors.black38,size: 35.0,),
                   new FlatButton(
                       onPressed: _listEntries(),
                       child: new Text(
@@ -51,6 +52,7 @@ class _FieldRegistrationState extends State<FieldRegistration> {
   void _save() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      showMessage(field.toString());
     }
   }
 
@@ -58,40 +60,44 @@ class _FieldRegistrationState extends State<FieldRegistration> {
     _formKey.currentState.reset();
   }
 
+  void showMessage(String message, [MaterialColor color = Colors.red]) {
+    _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(backgroundColor: color, content: new Text(message)));
+  }
+
   //Returns the form Widget
   form() {
-    FieldEntry fieldEntry;
+    Field field;
     return new Form(
-      autovalidate: true,
       key: _formKey,
       child: new Column(
         children: <Widget>[
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Field No:'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_number = value,
+            onSaved: (value) => field.fieldNumber = value,
           ),
           new TextFormField(
-              decoration: new InputDecoration(labelText: 'Total Area (Ha):'),
-              validator: (value) =>
-                  value.isEmpty ? "Please enter a value" : null,
-              onSaved: (value) =>
-                  fieldEntry.field_total_area //Todo parse to number,
-              ),
+            decoration: new InputDecoration(labelText: 'Total Area (Ha):'),
+            validator: (value) => value.isEmpty ? "Please enter a value" : null,
+            onSaved: (value) => field.fieldTotalArea = int.parse(value),
+            keyboardType: TextInputType.number,
+          ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Irrigation Source'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_irrigation_source = value,
+            onSaved: (value) => field.fieldIrrigationSource = value,
+            keyboardType: TextInputType.text,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Physical Barrier'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_physical_barrier = value,
+            onSaved: (value) => field.fieldPhysicalBarrier = value,
           ),
           new TextFormField(
             decoration: new InputDecoration(labelText: 'Field Address'),
             validator: (value) => value.isEmpty ? "Please enter a value" : null,
-            onSaved: (value) => fieldEntry.field_address = value,
+            onSaved: (value) => field.fieldAddress = value,
           ),
           new Center(
             child: new ButtonBar(
@@ -123,7 +129,10 @@ class _FieldRegistrationState extends State<FieldRegistration> {
                         ),
                         new Text(
                           'Save',
-                          style: textStyle(),
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              color: Colors.white
+                          ),
                         )
                       ],
                     ))
