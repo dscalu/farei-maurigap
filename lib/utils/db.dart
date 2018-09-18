@@ -19,26 +19,27 @@ class DBHelper {
 
   static Database _db;
 
-  Future<Database> get db async {
+  static Future<Database> get db async {
     if (_db != null) return _db;
     _db = await initDB();
+    print(_db);
     return _db;
   }
 
-  initDB() async {
+  static initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "MauriGap.db");
     var newDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return newDb;
   }
 
-  void _onCreate(Database db, int version) async {
+  static void _onCreate(Database db, int version) async {
     // SQL script for creating the Farmer table
     await db
         .execute('CREATE TABLE Farmer(farmer_fname TEXT, farmer_surname TEXT, '
             'farmer_nid TEXT PRIMARY KEY, farmer_sfwf TEXT, '
-            'farmer_farmunit TEXT)');
-    print('1: Farmer table created!');
+            'farmer_farmunit TEXT);');
+    await print('1: Farmer table created!');
 
     // SQL script for creating the Field table
     await db.execute('CREATE TABLE Field(field_num TEXT PRIMARY KEY, '
@@ -48,7 +49,7 @@ class DBHelper {
 
     // SQL script for creating the Supplier table
     await db.execute(
-        'CREATE TABLE Supplier(supplier_id TEXT PRIMARY KEY AUTOINCREMENT, '
+        'CREATE TABLE Supplier(supplier_id INTEGER PRIMARY KEY AUTOINCREMENT, '
         'supplier_name TEXT, supplier_addr TEXT)');
     print('3: Supplier Table created');
 

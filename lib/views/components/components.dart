@@ -48,9 +48,7 @@ Widget appBar(context) => PreferredSize(
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  left: 30.0
-                ),
+                padding: EdgeInsets.only(left: 30.0),
                 child: IconButton(
                   icon: Icon(
                     Icons.help_outline,
@@ -61,7 +59,6 @@ Widget appBar(context) => PreferredSize(
                     Navigator.of(context).pushNamed(Help.tag);
                   },
                 ),
-                onPressed: () {},
               )
             ]),
           ),

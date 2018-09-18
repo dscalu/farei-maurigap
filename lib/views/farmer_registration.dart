@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mauri_gap/models/farmer.dart';
 import './components/components.dart';
 import 'package:mauri_gap/views/field_registration.dart';
+import '../utils/db.dart';
 
 class FarmerRegistration extends StatefulWidget {
   static String tag = 'farmerRegistration';
@@ -88,7 +91,10 @@ class _FarmerRegistrationState extends State<FarmerRegistration> {
       //Todo: Store in database and firebase
       _formKey.currentState.save();
       showMessage("Processing ...", _scaffoldKey);
-      showMessage("Debugging purposes $farmer.toString()", _scaffoldKey);
+      DBHelper db = DBHelper();
+      db.addFarmer(farmer);
+      Future<List> list = db.queryRecords('Farmer');
+      print(list);
       showMessage("Field data has been successfully Saved", _scaffoldKey);
     }
   }
