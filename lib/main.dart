@@ -5,13 +5,14 @@ import 'package:mauri_gap/views/help.dart';
 import 'package:mauri_gap/views/nutrient_application.dart';
 import 'package:mauri_gap/views/planting_record.dart';
 import 'package:mauri_gap/views/farmer_registration.dart';
+import 'package:mauri_gap/views/splash_screen.dart';
 import './views/home.dart';
 import './views/login.dart';
 import './views/stock_tracking.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Maurigap());
 
-class MyApp extends StatelessWidget {
+class Maurigap extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
     HomePage.tag: (context) => HomePage(title: 'MauriGap'),
@@ -33,14 +34,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MauriGap Demo',
-//      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.lightGreen,
         fontFamily: 'Nunito',
         /*textTheme: TextTheme(
         )*/
       ),
-      home: LoginPage(),
+      home: SplashScreen(),
 //      initialRoute: LoginPage.tag,
       routes: routes,
     );
