@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         });
       });
     controller.forward();
-    Timer(Duration(seconds: 4), () {
+    Timer(Duration(seconds: 10), () {
       setState(() {
         _visible = !_visible;
       });
@@ -108,8 +108,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       ),
                       Text(
                         "Brought to you by \n"
-                            "Food and Agricultural Research and "
-                            "\nExtension Institute ",
+                            "FAREI",
                         softWrap: true,
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -117,6 +116,17 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             fontSize: 15.0,
                             height: 1.3,
                             color: Colors.white),
+                      ),
+                      Text(
+                        "\nDeveloped by \n"
+                            "DSC ALU/ Safe Sha Training",
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                            height: 1.3,
+                            color: Colors.orange),
                       ),
                     ],
                   ),

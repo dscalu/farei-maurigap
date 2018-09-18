@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     super.initState();
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    animation = Tween(begin: 100.0, end: 150.0).animate(controller)
+    animation = Tween(begin: 70.0, end: 120.0).animate(controller)
       ..addListener(() {
         setState(() {
           // the state that has changed here is the animation object’s value
