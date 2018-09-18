@@ -48,9 +48,7 @@ Widget appBar(context) => PreferredSize(
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  left: 30.0
-                ),
+                padding: EdgeInsets.only(left: 30.0),
                 child: IconButton(
                   icon: Icon(
                     Icons.help_outline,
@@ -95,6 +93,7 @@ buttonFontStyle() => TextStyle(color: Colors.grey, fontSize: 20.0);
 
 padding() => EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0);
 
+// ignore: non_constant_identifier_names
 void showMessage(String message, Key, {double duration}) {
   Key.currentState.showSnackBar(new SnackBar(
       backgroundColor: Colors.lightGreen,
