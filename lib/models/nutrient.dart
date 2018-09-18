@@ -1,5 +1,3 @@
-import './field.dart';
-
 enum Unit { kg, ml }
 
 class Nutrient {
