@@ -1,4 +1,4 @@
-package com.example.maurigap;
+package mu.farei.maurigap;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

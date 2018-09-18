@@ -23,13 +23,19 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(context),
       body: Container(
         child: ListView(
-          padding: EdgeInsets.all(14.0),
+          shrinkWrap: true,
+          padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
           children: <Widget>[
             tile('Farmer Registration', FarmerRegistration.tag),
+            Divider(),
             tile('Stock Tracking', StockTracking.tag),
+            Divider(),
             tile('Planting Records', PlantingRecords.tag),
+            Divider(),
             tile('Nutrient Application', NutrientApplication.tag),
+            Divider(),
             tile('Harvest Records', HarvestRecords.tag),
+            Divider(),
             tile('FAQ/Help', Help.tag),
           ],
         ),
@@ -55,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           tileName,
           style: TextStyle(
             color: Colors.black54,
-            fontSize: 22.0,
+            fontSize: 20.0,
             height: 2.4,
           ),
         ),
