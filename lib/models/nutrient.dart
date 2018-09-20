@@ -31,4 +31,8 @@ class Nutrient {
         'applicationMode: $applicationMode, '
         'crop: $crop, area: $area}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

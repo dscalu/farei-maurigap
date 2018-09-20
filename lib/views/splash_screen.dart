@@ -36,12 +36,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         });
       });
     controller.forward();
-    Timer(Duration(seconds: 10), () {
+    Timer(Duration(seconds: 5), () {
       setState(() {
         _visible = !_visible;
       });
       Timer(Duration(milliseconds: 500),
-              () => Navigator.pushReplacementNamed(context, LoginPage.tag));
+              () => Navigator.pushReplacementNamed(context, LoginPage.routeName));
     });
   }
 
@@ -119,7 +119,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       ),
                       Text(
                         "\nDeveloped by \n"
-                            "DSC ALU/ Safe Sha Training",
+                            "DSC ALU & Safe Sha Training",
                         softWrap: true,
                         textAlign: TextAlign.center,
                         style: TextStyle(

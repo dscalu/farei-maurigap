@@ -14,19 +14,19 @@ void main() => runApp(Maurigap());
 
 class Maurigap extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    LoginPage.tag: (context) => LoginPage(),
-    HomePage.tag: (context) => HomePage(title: 'MauriGap'),
-    HarvestRecords.tag: (context) => HarvestRecords(title: 'Harvest Records'),
-    FieldRegistration.tag: (context) =>
+    LoginPage.routeName: (context) => LoginPage(),
+    HomePage.routeName: (context) => HomePage(title: 'MauriGap'),
+    HarvestRecords.routeName: (context) => HarvestRecords(title: 'Harvest Records'),
+    FieldRegistration.routeName: (context) =>
         FieldRegistration(title: 'Field Registration'),
-    PlantingRecords.tag: (context) =>
+    PlantingRecords.routeName: (context) =>
         PlantingRecords(title: 'Planting Records'),
-    StockTracking.tag: (context) => StockTracking(),
-    NutrientApplication.tag: (context) =>
+    StockTracking.routeName: (context) => StockTracking(),
+    NutrientApplication.routeName: (context) =>
         NutrientApplication(title: 'Nutrient Application'),
-    FarmerRegistration.tag: (context) =>
+    FarmerRegistration.routeName: (context) =>
         FarmerRegistration(title: 'Farmer Registration'),
-    Help.tag: (context) => Help(title: 'Help & FAQ'),
+    Help.routeName: (context) => Help(title: 'Help & FAQ'),
   };
 
   @override
@@ -37,8 +37,6 @@ class Maurigap extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.lightGreen,
         fontFamily: 'Nunito',
-        /*textTheme: TextTheme(
-        )*/
       ),
       home: SplashScreen(),
 //      initialRoute: LoginPage.tag,

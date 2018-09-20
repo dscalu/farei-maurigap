@@ -3,7 +3,7 @@ import 'package:mauri_gap/models/nutrient.dart';
 import './components/components.dart';
 
 class NutrientApplication extends StatefulWidget {
-  static String tag = 'nutrientApplication';
+  static String routeName = '/nutrientApplication';
   final String title;
 
   NutrientApplication({Key key, this.title}) : super(key: key);
