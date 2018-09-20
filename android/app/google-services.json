@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "528819269824",
+    "firebase_url": "https://maurigap1.firebaseio.com",
+    "project_id": "maurigap1",
+    "storage_bucket": "maurigap1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528819269824:android:7e632c626d02e03d",
+        "android_client_info": {
+          "package_name": "mu.farei.maurigap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528819269824-nb974fdbdjdhe54oa0l826og3s28ft17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMeb11fAvBtiJVaXJcBIlqI_acKnpqnCU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

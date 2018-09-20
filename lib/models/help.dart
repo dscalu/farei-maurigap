@@ -8,4 +8,8 @@ class HelpRecord {
   String toString() {
     return 'HelpRecord{title: $title, instructions: $instructions}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

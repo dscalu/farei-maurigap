@@ -33,4 +33,8 @@ class Stock {
         'dateReceived: $dateReceived, '
         'storageAddr: $storageAddr}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

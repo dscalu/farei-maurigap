@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:mauri_gap/utils/firebase.dart';
+import 'package:mauri_gap/views/farmer_registration.dart';
 import './components/components.dart';
 import 'package:mauri_gap/models/field.dart';
 
 class FieldRegistration extends StatefulWidget {
-  static final String tag = 'fieldRegistration';
+  static final String routeName = '/'+FarmerRegistration.routeName+'/fieldRegistration';
   final String title;
 
   FieldRegistration({Key key, this.title}) : super(key: key);
@@ -60,10 +64,8 @@ class _FieldRegistrationState extends State<FieldRegistration> {
   void _save() {
     if (_formKey.currentState.validate()) {
       showMessage("Processing ...", _scaffoldKey);
-      //showMessage("Debugging purposes $field.toString()", _scaffoldKey);
-      //Todo: Store in database and firebase
-      _formKey.currentState.save();
-      showMessage("Field data has been successfully Saved", _scaffoldKey);
+      Future<String> refKey = Database.addFirebaseRecord(field: field,scaffoldKey: _scaffoldKey);
+      refKey.catchError((onError)=>showMessage("Could not save data",_scaffoldKey));
     }
   }
 

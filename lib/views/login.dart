@@ -3,7 +3,7 @@ import 'package:mauri_gap/views/components/components.dart';
 import './home.dart';
 
 class LoginPage extends StatefulWidget {
-  static String tag = 'login-page'; // to be used for routing
+  static String routeName = '/login';
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     super.initState();
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
-    animation = Tween(begin: 100.0, end: 150.0).animate(controller)
+    animation = Tween(begin: 70.0, end: 120.0).animate(controller)
       ..addListener(() {
         setState(() {
           // the state that has changed here is the animation object’s value
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
           color: Colors.lightGreen,
           height: 42.0,
           onPressed: () {
-            Navigator.of(context).pushNamed(HomePage.tag);
+            Navigator.of(context).pushNamed(HomePage.routeName);
           },
           minWidth: 20.0,
         ),

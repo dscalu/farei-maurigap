@@ -6,7 +6,7 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 
 class HarvestRecords extends StatefulWidget {
-  static final String tag = 'harvestRecords';
+  static final String routeName = '/harvestRecords';
   final String title;
 
   HarvestRecords({Key key, this.title}) : super(key: key);

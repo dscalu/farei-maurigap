@@ -56,7 +56,7 @@ Widget appBar(context) => PreferredSize(
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed(Help.tag);
+                    Navigator.of(context).pushNamed(Help.routeName);
                   },
                 ),
               )
@@ -94,10 +94,9 @@ buttonFontStyle() => TextStyle(color: Colors.grey, fontSize: 20.0);
 padding() => EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0);
 
 // ignore: non_constant_identifier_names
-void showMessage(String message, Key, {double duration}) {
+void showMessage(String message, Key, {Color color = Colors.lightGreen}) {
   Key.currentState.showSnackBar(new SnackBar(
-      backgroundColor: Colors.lightGreen,
-      //Todo: figure out the duration option and how it works
+      backgroundColor: color,
       content: new Text(
         message,
         textAlign: TextAlign.center,
