@@ -26,4 +26,8 @@ class Harvest {
         'units: $units, '
         'harvester: $harvester}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

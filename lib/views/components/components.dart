@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mauri_gap/utils/application_constants.dart';
+import 'package:mauri_gap/views/help.dart';
 
-Widget fareiImage() {
-  var assetsImage = new AssetImage('assets/farei-logo.png');
+Widget fareiImage([double dimension]) {
+  var assetsImage = new AssetImage('assets/farei_logo_circle.png');
   var image = new Image(
     image: assetsImage,
-    width: 110.0,
-    height: 110.0,
+    width: dimension != null ? dimension : 120.0,
+    height: dimension != null ? dimension : 120.0,
   );
   return image;
 }
@@ -15,27 +17,27 @@ Widget appBar(context) => PreferredSize(
     preferredSize: Size.fromHeight(70.0),
     child: AppBar(
         leading: FlatButton(
-          padding: const EdgeInsets.fromLTRB(30.0, 17.0, 20.0, 20.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 15.0, 20.0, 20.0),
           child: Icon(
-            Icons.arrow_back_ios,
+            FontAwesomeIcons.chevronCircleLeft,
             color: Colors.white,
-            size: 35.0,
+            size: 40.0,
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Padding(
-          padding: const EdgeInsets.only(top: 6.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: ListTile(
             leading: Image(
-              image: AssetImage('assets/farei-logo.png'),
-              width: 40.0,
-              height: 40.0,
+              image: AssetImage('assets/farei_logo_circle.png'),
+              width: 35.0,
+              height: 35.0,
             ),
             title: Row(children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 14.0),
+                padding: const EdgeInsets.only(left: 19.0),
                 child: new Text(
                   APPLICATION_NAME,
                   textAlign: TextAlign.start,
@@ -45,29 +47,31 @@ Widget appBar(context) => PreferredSize(
                   ),
                 ),
               ),
-              IconButton(
-                padding: EdgeInsets.only(
-                  left: 30.0,
-                ),
-                icon: Icon(
-                  Icons.help_outline,
-                  size: 40.0,
-                  color: Colors.white,
+              Padding(
+                padding: EdgeInsets.only(left: 30.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.help_outline,
+                    size: 40.0,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Help.routeName);
+                  },
                 ),
               )
             ]),
-            contentPadding: EdgeInsets.only(left: 20.0),
           ),
         )));
 
 Widget headingTextStyle(String name) => new Container(
-    color: Colors.grey.withOpacity(0.3),
+    color: Colors.grey.withOpacity(0.2),
     width: 400.00,
-    padding: EdgeInsets.fromLTRB(30.00, 20.00, 20.00, 20.00),
+    padding: EdgeInsets.fromLTRB(40.00, 20.00, 20.00, 20.00),
     child: new Text(name,
         style: new TextStyle(
           color: Colors.black54,
-          fontSize: 22.0,
+          fontSize: 20.0,
         )));
 
 Widget viewTile(String recordType) {
@@ -89,10 +93,10 @@ buttonFontStyle() => TextStyle(color: Colors.grey, fontSize: 20.0);
 
 padding() => EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0);
 
-void showMessage(String message, Key, {double duration}) {
+// ignore: non_constant_identifier_names
+void showMessage(String message, Key, {Color color = Colors.lightGreen}) {
   Key.currentState.showSnackBar(new SnackBar(
-      backgroundColor: Colors.lightGreen,
-      //Todo: figure out the duration option and how it works
+      backgroundColor: color,
       content: new Text(
         message,
         textAlign: TextAlign.center,

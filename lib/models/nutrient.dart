@@ -1,5 +1,3 @@
-import './field.dart';
-
 enum Unit { kg, ml }
 
 class Nutrient {
@@ -32,5 +30,9 @@ class Nutrient {
         'unit: $unit, '
         'applicationMode: $applicationMode, '
         'crop: $crop, area: $area}';
+  }
+
+  toJSON() {
+    return <String, dynamic>{};
   }
 }

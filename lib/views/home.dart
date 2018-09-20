@@ -9,7 +9,7 @@ import 'package:mauri_gap/views/planting_record.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
-  static final String tag = 'home';
+  static final String routeName = '/home';
   final String title;
 
   @override
@@ -23,14 +23,20 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(context),
       body: Container(
         child: ListView(
-          padding: EdgeInsets.all(14.0),
+          shrinkWrap: true,
+          padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
           children: <Widget>[
-            tile('Farmer Registration', FarmerRegistration.tag),
-            tile('Stock Tracking', StockTracking.tag),
-            tile('Planting Records', PlantingRecords.tag),
-            tile('Nutrient Application', NutrientApplication.tag),
-            tile('Harvest Records', HarvestRecords.tag),
-            tile('FAQ/Help', Help.tag),
+            tile('Farmer Registration', FarmerRegistration.routeName),
+            Divider(),
+            tile('Stock Tracking', StockTracking.routeName),
+            Divider(),
+            tile('Planting Records', PlantingRecords.routeName),
+            Divider(),
+            tile('Nutrient Application', NutrientApplication.routeName),
+            Divider(),
+            tile('Harvest Records', HarvestRecords.routeName),
+            Divider(),
+            tile('FAQ/Help', Help.routeName),
           ],
         ),
       ),
@@ -55,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           tileName,
           style: TextStyle(
             color: Colors.black54,
-            fontSize: 22.0,
+            fontSize: 20.0,
             height: 2.4,
           ),
         ),

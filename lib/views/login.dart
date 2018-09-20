@@ -3,13 +3,31 @@ import 'package:mauri_gap/views/components/components.dart';
 import './home.dart';
 
 class LoginPage extends StatefulWidget {
-  static String tag = 'login-page'; // to be used for routing
+  static String routeName = '/login';
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin{
+
+  Animation<double> animation;
+  AnimationController controller;
+
+  @override
+  initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    animation = Tween(begin: 70.0, end: 120.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    controller.forward();
+  }
+
   Widget email() {
     return TextFormField(
       autofocus: false,
@@ -26,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget logo() {
     return Hero(
       tag: 'hero',
-      child: fareiImage(),
+      child: fareiImage(150.0),
     );
   }
 
@@ -45,17 +63,17 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 45.0),
       child: Material(
         child: MaterialButton(
           child: Text(
-            'Log In',
-            style: TextStyle(color: Colors.white, fontSize: 22.0),
+            'Login',
+            style: TextStyle(color: Colors.white, fontSize: 22.0,fontWeight: FontWeight.w300),
           ),
           color: Colors.lightGreen,
           height: 42.0,
           onPressed: () {
-            Navigator.of(context).pushNamed(HomePage.tag);
+            Navigator.of(context).pushNamed(HomePage.routeName);
           },
           minWidth: 20.0,
         ),
@@ -79,20 +97,23 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: ListView(
-          children: <Widget>[
-            logo(),
-            SizedBox(height: 48.0),
-            email(),
-            SizedBox(height: 8.0),
-            password(),
-            SizedBox(height: 24.0),
-            loginButton(),
-            forgotButton()
-          ],
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          shrinkWrap: true,
-        ),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                  width: animation.value,
+                  height: animation.value,
+                  child: logo()),
+              SizedBox(height: 24.0),
+              email(),
+              SizedBox(height: 16.0),
+              password(),
+              SizedBox(height: 20.0),
+              loginButton(),
+              forgotButton()
+            ],
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
+          ),
       ),
     );
   }

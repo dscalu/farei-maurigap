@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mauri_gap/models/farmer.dart';
+import 'package:mauri_gap/utils/firebase.dart';
 import './components/components.dart';
 import 'package:mauri_gap/views/field_registration.dart';
 
 class FarmerRegistration extends StatefulWidget {
-  static String tag = 'farmerRegistration';
+  static String routeName = '/farmerRegistration';
   final String title;
 
   FarmerRegistration({Key key, this.title}) : super(key: key);
@@ -48,7 +51,7 @@ class _FarmerRegistrationState extends State<FarmerRegistration> {
                       FlatButton(
                           onPressed: () {
                             Navigator.of(context)
-                                .pushNamed(FieldRegistration.tag);
+                                .pushNamed(FieldRegistration.routeName);
                           },
                           child: Text(
                             "Add  field",
@@ -87,9 +90,20 @@ class _FarmerRegistrationState extends State<FarmerRegistration> {
     if (_formKey.currentState.validate()) {
       //Todo: Store in database and firebase
       _formKey.currentState.save();
-      showMessage("Processing ...", _scaffoldKey);
-      showMessage("Debugging purposes $farmer.toString()", _scaffoldKey);
-      showMessage("Field data has been successfully Saved", _scaffoldKey);
+
+      Future<String> refKey =
+          Database.addFirebaseRecord(farmer: farmer, scaffoldKey: _scaffoldKey);
+
+      refKey.catchError((onError){
+        showMessage(
+          'Data will be sent to the cloud another time. Caused by: $onError', _scaffoldKey,
+          color: Colors.orange);
+      });
+      /*DBHelper db = DBHelper();
+      db.addFarmer(farmer);
+      Future<List> list = db.queryRecords('Farmer');
+      print(list);
+      */
     }
   }
 
@@ -173,3 +187,5 @@ class _FarmerRegistrationState extends State<FarmerRegistration> {
     );
   }
 }
+
+retry() {}

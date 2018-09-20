@@ -3,7 +3,7 @@ import './components/components.dart';
 import '../models/planting.dart';
 
 class PlantingRecords extends StatefulWidget {
-  static final String tag = 'plantingRecords';
+  static final String routeName = '/plantingRecords';
   final String title;
 
   PlantingRecords({Key key, this.title}) : super(key: key);

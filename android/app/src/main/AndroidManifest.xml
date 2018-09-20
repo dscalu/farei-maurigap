@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.maurigap">
+    package="mu.farei.maurigap">
 
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
@@ -15,7 +15,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="MauriGap"
-        android:icon="@mipmap/farei">
+        android:icon="@mipmap/farei_logo_square">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

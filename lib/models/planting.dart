@@ -27,4 +27,8 @@ class PlantingRecord {
         'crop: $crop, '
         'variety: $variety, area: $area}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

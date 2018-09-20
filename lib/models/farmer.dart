@@ -1,3 +1,5 @@
+import 'package:mauri_gap/utils/date_picker.dart';
+
 class Farmer {
   String firstName;
   String surName;
@@ -20,5 +22,16 @@ class Farmer {
         'nidNo: $nidNo, '
         'sfwfRegNo: $sfwfRegNo, '
         'farmUnit: $farmUnit}';
+  }
+
+  toJSON() {
+    return <String, dynamic>{
+      'farmer_fname': firstName,
+      'farmer_surname': surName,
+      'farmer_nid': nidNo,
+      'farmer_sfwf': sfwfRegNo,
+      'farmer_farmunit': farmUnit,
+      'created_on': getDateNow(),
+    };
   }
 }

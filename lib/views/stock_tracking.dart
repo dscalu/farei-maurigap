@@ -3,7 +3,7 @@ import 'package:mauri_gap/models/stock.dart';
 import './components/components.dart';
 
 class StockTracking extends StatefulWidget {
-  static String tag = 'stockTracking';
+  static String routeName = '/stockTracking';
 
   @override
   _StockTracking createState() => _StockTracking();

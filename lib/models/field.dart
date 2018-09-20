@@ -21,4 +21,8 @@ class Field {
         'fieldPhysicalBarrier: $fieldPhysicalBarrier, '
         'fieldAddress: $fieldAddress}';
   }
+
+  toJSON() {
+    return <String, dynamic>{};
+  }
 }

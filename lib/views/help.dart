@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mauri_gap/models/Help.dart';
+import 'package:mauri_gap/models/help.dart';
 import 'package:mauri_gap/views/components/components.dart';
 
 class Help extends StatefulWidget {
-  static final String tag = 'help';
+  static final String routeName = '/help';
   final String title;
 
   Help({Key key, this.title}) : super(key: key);
