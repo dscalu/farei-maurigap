@@ -4,4 +4,5 @@
 .pub/
 build/
 .flutter-plugins
-.idea
+.idea/
+ios/
